@@ -1,0 +1,87 @@
+{
+  // Zed Settings for Odoo Development
+  // Place this in your Zed settings.json file
+
+  "lsp": {
+    "odoo": {
+      "settings": {
+        "Odoo": {
+          // Profile to use - can be "default", "auto", or a custom profile name
+          "selectedProfile": "default"
+          // Note: Most configuration should be done in odools.toml files
+          // Only profile selection is typically needed in Zed settings
+        }
+      },
+      "initialization_options": {
+        // Initialize with specific workspace configuration
+        "workspaceFolders": null,
+        "processId": null
+      }
+    }
+  },
+
+  // Language-specific settings for better Odoo development
+  "languages": {
+    "Python": {
+      "format_on_save": {
+        "enabled": true,
+        "external": {
+          "command": "black",
+          "arguments": ["-"]
+        }
+      },
+      "code_actions_on_format": ["source.organizeImports"]
+    },
+    "XML": {
+      "format_on_save": {
+        "enabled": true
+      },
+      "formatter": {
+        "external": {
+          "command": "xmllint",
+          "arguments": ["--format", "-"]
+        }
+      }
+    },
+    "JavaScript": {
+      "format_on_save": {
+        "enabled": true
+      },
+      "formatter": "prettier"
+    },
+    "CSS": {
+      "format_on_save": {
+        "enabled": true
+      },
+      "formatter": "prettier"
+    }
+  },
+
+  // File associations for Odoo-specific files
+  "file_types": {
+    "*.xml": "XML",
+    "*.csv": "CSV",
+    "*.py": "Python",
+    "*.js": "JavaScript",
+    "*.css": "CSS",
+    "*.json": "JSON",
+    "__manifest__.py": "Python",
+    "__init__.py": "Python"
+  },
+
+  // Project-specific settings
+  "project_panel": {
+    "dock": "left"
+  },
+
+  // Git integration for Odoo projects
+  "git": {
+    "git_gutter": "tracked_files"
+  },
+
+  // Terminal settings for running Odoo
+  "terminal": {
+    "dock": "bottom",
+    "default_height": 320
+  }
+}

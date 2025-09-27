@@ -1,0 +1,84 @@
+{
+  // Workspace-specific settings for Zed + Odoo
+  // Place this in your project's .zed/settings.json file
+
+  "lsp": {
+    "odoo": {
+      "settings": {
+        "Odoo": {
+          // Use a specific profile for this workspace
+          "selectedProfile": "development",
+
+          // Workspace-specific refresh mode
+          "refreshMode": "adaptive",
+
+          // Show all import diagnostics in development
+          "diagMissingImportsMode": "all"
+        }
+      }
+    }
+  },
+
+  // Project-specific formatter settings
+  "formatter": "language_server",
+  "format_on_save": "on",
+
+  // Language-specific overrides for this workspace
+  "languages": {
+    "Python": {
+      "tab_size": 4,
+      "hard_tabs": false,
+      "format_on_save": {
+        "enabled": true,
+        "external": {
+          "command": "black",
+          "arguments": ["--line-length", "88", "-"]
+        }
+      }
+    },
+    "XML": {
+      "tab_size": 2,
+      "hard_tabs": false
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "formatter": "prettier"
+    }
+  },
+
+  // Workspace-specific file explorer settings
+  "project_panel": {
+    "dock": "left",
+    "default_width": 240
+  },
+
+  // Hide common Odoo artifacts
+  "file_scan_exclusions": [
+    "**/__pycache__",
+    "**/*.pyc",
+    "**/node_modules",
+    "**/filestore",
+    "**/sessions",
+    "**/.git"
+  ],
+
+  // Terminal settings for Odoo development
+  "terminal": {
+    "shell": {
+      "program": "bash"
+    },
+    "env": {
+      "PYTHONPATH": "./",
+      "ODOO_RC": "./odoo.conf"
+    }
+  },
+
+  // Git settings for Odoo projects
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": true
+    }
+  }
+}

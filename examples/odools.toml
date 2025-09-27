@@ -1,0 +1,108 @@
+# Odoo Language Server Configuration
+# Place this file in your project root or any parent directory
+# The odoo-zed extension will automatically detect this file
+
+# Configuration entry with default profile
+[[config]]
+name = "default"
+
+# Optional: inherit from another configuration profile
+# extends = "base_profile"
+
+# Path to your Odoo installation
+odoo_path = "/path/to/odoo"
+
+# Additional addon paths
+addons_paths = [
+    "/path/to/custom/addons",
+    "/path/to/enterprise/addons",
+    "$autoDetectAddons"  # Automatically detect addons in workspace
+]
+
+# Python executable path (auto-detected if not specified)
+python_path = "python3"
+
+# Additional Python stubs
+additional_stubs = [
+    "/path/to/custom/stubs"
+]
+
+# Refresh mode: "on_save", "adaptive", or "off"
+refresh_mode = "adaptive"
+
+# Diagnostic settings for missing imports: "all", "only_odoo", or "none"
+diag_missing_imports = "all"
+
+# Auto-refresh delay in milliseconds
+auto_refresh_delay = 1000
+
+# Model name autocompletion filter: true for "only_available", false for "all"
+ac_filter_model_names = true
+
+# Move file cache to disk (reduces RAM usage)
+file_cache = false
+
+# Custom stdlib path (optional)
+# stdlib = "/path/to/custom/stdlib"
+
+# Disable typeshed stubs if you provide your own
+# no_typeshed_stubs = false
+
+# Diagnostic filters (applied to this config entry)
+[[config.diagnostic_filters]]
+# Filter diagnostics by file paths
+paths = ["*/migrations/*", "*/tests/*"]
+path_type = "not_in"  # "in" or "not_in"
+
+# Filter specific diagnostic codes (regex patterns)
+codes = ["OLS.*"]
+
+# Filter by diagnostic types
+types = ["error", "warning", "info"]
+
+# Diagnostic settings - customize severity levels for specific codes
+[config.diagnostic_settings]
+# Override default diagnostic levels
+# Available levels: "error", "warning", "info", "hint", "disabled"
+
+# Example: Turn off specific diagnostics
+"OLS01001" = "disabled"  # Base class not found
+"OLS02001" = "warning"   # Import not found
+
+# Example: Make warnings into errors
+"OLS03002" = "error"     # Unknown model
+
+# Additional configuration profiles
+[[config]]
+name = "development"
+
+odoo_path = "/opt/odoo"
+addons_paths = ["/opt/odoo/custom_addons", "$autoDetectAddons"]
+python_path = "/opt/odoo/.venv/bin/python"
+refresh_mode = "adaptive"
+diag_missing_imports = "all"
+ac_filter_model_names = false  # Show all models for development
+
+[[config]]
+name = "production"
+
+odoo_path = "/opt/odoo"
+addons_paths = ["/opt/odoo/custom_addons", "$autoDetectAddons"]
+python_path = "/opt/odoo/.venv/bin/python"
+refresh_mode = "on_save"  # More conservative
+diag_missing_imports = "only_odoo"
+file_cache = true  # Use disk cache in production
+
+[[config]]
+name = "testing"
+
+odoo_path = "/opt/odoo"
+addons_paths = ["/opt/odoo/custom_addons", "$autoDetectAddons"]
+python_path = "/opt/odoo/.venv/bin/python"
+refresh_mode = "off"  # No auto-refresh during testing
+
+# Filter out test-specific diagnostics
+[[config.diagnostic_filters]]
+paths = ["*/tests/*", "*/migrations/*"]
+path_type = "in"
+codes = ["OLS.*"]
